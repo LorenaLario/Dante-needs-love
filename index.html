@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="Dante needs love">
+    <title>Dante needs love</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <section id="pantalla-inicio" class="pantalla-base">
+        <div>
+            <img src="imagenes/into-foto.png" alt="img-Dante">
+            <p>Un malvado monstruo ha aterrorizado el pequeño planeta de Dante. Necesitamos ayudarlo, pero... ¿cómo
+                podemos
+                hacerlo?
+                ¡Súper fácil! Ayuda a nuestra pequeña gelatina a recoger todos los corazones posibles sin que los
+                ataques
+                del cielo o las
+                plataformas humeantes te paren en seco. ¡Múcha suerte!
+            </p>
+        </div>
+
+        <div id="img-and-button">
+            <img src="imagenes/teclitas-de-juego.png" alt="img-teclitas">
+            <!-- Aquí falta poner el href de la siguiente seccion -->
+            <button id="playBtn">Que comience la aventura !</button>
+        </div>
+    </section>
+
+    <section id="primer-nivel" class="pantalla-base hide">
+        <canvas class="my-Canvas" width="1052" height="650"></canvas>
+    </section>
+    <section id="gameOver" class="pantalla-base hide">
+        <img src="imagenes/has-perdido.png" alt="img-sad-Dante">
+        <button id="AgainBtn">Otra vez !</button>
+    </section>
+    <script src="./SuperMain.js"></script>
+    <script src="./Game.js"></script>
+    <script src="./Dante.js"></script>
+    <script src="./Pincho.js"></script>
+
+</body>
+
+</html>
