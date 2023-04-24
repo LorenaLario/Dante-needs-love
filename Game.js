@@ -29,12 +29,15 @@ class Game {
         this.isGameOn = false;
         primerNivel.classList.add("hide")
         gameOver.classList.remove("hide")
+  audioNivel1.pause();
+  audioNivel1.currentTime = 0
+
       };
     
     pinchosEnPantalla = () => {
         if (this.pinchosArr.length === 0 || this.pinchosArr[this.pinchosArr.length - 1].x < canvas.width) {
             let posicionRandomPincho = Math.random() * 300 + canvas.width + 200;
-            let nuevoPincho = new Pincho(565, posicionRandomPincho);
+            let nuevoPincho = new Pincho(575, posicionRandomPincho);
             this.pinchosArr.push(nuevoPincho)
         }
       };

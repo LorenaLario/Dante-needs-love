@@ -10,7 +10,7 @@ class Dante {
     this.w = 60;
     this.h = 60;
 
-    this.velocidadSalto = 4;
+    this.velocidadSalto = 5;
 
     this.puedeSaltar = true;
     this.estasSaltando = false;
@@ -40,10 +40,24 @@ class Dante {
     } else {
         this.y = 560
         this.puedeSaltar = true
+      this.img.src = "imagenes/al-moverse.png"
     }
-  }
+  };
 
+  imgSaltando = () => {
+    if (this.y > 0 && this.puedeSaltar === true) {
+      this.puedeSaltar = false
+      this.estasSaltando = true
+      this.img.src = "imagenes/cuando-salta.png"
+      setTimeout(() => {
+          this.estasSaltando = false;
+      }, 300)
+     }
+     
+     
+    }
+    
+    
+    
+  };
 
-
-
-}

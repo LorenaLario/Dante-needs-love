@@ -6,8 +6,8 @@ class Pincho {
         this.x = posicX;
         this.y = posicY;
 
-        this.w = 40;
-        this.h = 50;
+        this.w = 30;
+        this.h = 40;
 
         this.velocidad = 2.6;
     }
