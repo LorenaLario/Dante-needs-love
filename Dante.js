@@ -10,7 +10,7 @@ class Dante {
     this.w = 80;
     this.h = 80;
 
-    this.velocidadSalto = 8;
+    this.velocidadSalto = 4;
 
     this.puedeSaltar = true;
     this.estasSaltando = false;
@@ -28,7 +28,7 @@ class Dante {
         this.estasSaltando = true
         setTimeout(() => {
             this.estasSaltando = false;
-        },200)
+        }, 300)
     }
   };
 

@@ -9,10 +9,14 @@ class Pincho {
         this.w = 60;
         this.h = 100;
 
-        this.speed = 1.5;
+        this.velocidad = 1.5;
     }
 
     draw = () => {
         ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
       };
+
+    pinchosSeMueven = () => {
+        this.x -= this.velocidad;
+    };  
 }

@@ -27,15 +27,17 @@ class Game {
         this.isGameOn = false;
         primerNivel.classList.add("hide")
         this.gameOver.classList.remove("hide")
-      }
+      };
     
     pinchosEnPantalla = () => {
-        if (this.pinchosArr.length === 0 || this.pinchosArr[this.pinchosArr.length - 1].x < this.danteObj.x) {
-            let posicionRandom = Math.random() * 300 + canvas.width;
-            let nuevoPincho = new Pincho(this.danteObj.y -5, posicionRandom);
+        if (this.pinchosArr.length === 0 || this.pinchosArr[this.pinchosArr.length - 1].x < canvas.width) {
+            let posicionRandom = Math.random() * 300 + canvas.width + 200;
+            let nuevoPincho = new Pincho(535, posicionRandom);
             this.pinchosArr.push(nuevoPincho)
         }
-    }  
+      };  
+
+    
 
       gameLoop = () => {
         console.log("ejecutando recursion")
@@ -46,6 +48,9 @@ class Game {
         //? Acciones y movimientos de los elementos
         this.pinchosEnPantalla()
         this.danteObj.logicaSalto()
+        this.pinchosArr.forEach((eachPincho) => {
+            eachPincho.pinchosSeMueven()
+        })
 
         //? Dibujado de los elementos
         this.drawBackground()

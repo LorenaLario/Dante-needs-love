@@ -27,7 +27,7 @@ const playAgain = () => {
   primerNivel.classList.add("hide");
   pantallaPerderDOM.classList.remove("hide");
 
-  gameObj = newGame();
+  gameObj = new Game();
   gameObj.gameLoop();
 };
 
