@@ -6,10 +6,10 @@ class Pincho {
         this.x = posicX;
         this.y = posicY;
 
-        this.w = 60;
-        this.h = 100;
+        this.w = 40;
+        this.h = 50;
 
-        this.velocidad = 1.5;
+        this.velocidad = 2.6;
     }
 
     draw = () => {

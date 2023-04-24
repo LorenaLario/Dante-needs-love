@@ -24,8 +24,8 @@ const startGame = () => {
 };
 
 const playAgain = () => {
-  primerNivel.classList.add("hide");
-  pantallaPerderDOM.classList.remove("hide");
+  primerNivel.classList.remove("hide");
+  pantallaPerderDOM.classList.add("hide");
 
   gameObj = new Game();
   gameObj.gameLoop();
