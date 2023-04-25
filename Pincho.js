@@ -1,7 +1,7 @@
 class Pincho {
-    constructor(posicY, posicX) {
+    constructor(posicY, posicX, img) {
         this.img = new Image();
-        this.img.src = "imagenes/pincho.png"
+        this.img.src = img;
 
         this.x = posicX;
         this.y = posicY;
@@ -9,7 +9,7 @@ class Pincho {
         this.w = 30;
         this.h = 40;
 
-        this.velocidad = 2.6;
+        this.velocidad = 6;
     }
 
     draw = () => {

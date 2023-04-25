@@ -1,7 +1,7 @@
 class Corazon {
-    constructor (posicY, posicX) {
+    constructor (posicY, posicX, img) {
         this.img = new Image();
-        this.img.src = "imagenes/corazon-primer-nivel.png"
+        this.img.src = img;
 
         this.x = posicX;
         this.y = posicY;
@@ -9,7 +9,7 @@ class Corazon {
         this.w = 70;
         this.h = 40;
 
-        this.velocidad = 2.3;
+        this.velocidad = 6;
     }
 
     draw = () => {
