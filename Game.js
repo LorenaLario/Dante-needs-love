@@ -179,6 +179,8 @@ class Game {
     this.logicaNivel2();
     // this.colisionDantePincho();
     this.colisionDanteCorazon();
+    this.danteObj.pasitoDFluido();
+    this.danteObj.pasitoIFluido();
     this.danteObj.logicaSalto();
     this.pinchosArr.forEach((eachPincho) => {
       eachPincho.pinchosSeMueven();

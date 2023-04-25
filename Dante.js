@@ -11,9 +11,12 @@ class Dante {
     this.h = 60;
 
     this.velocidadSalto = 5;
+    this.velocidad = 3;
 
     this.puedeSaltar = true;
     this.estasSaltando = false;
+    this.vasHaciaDelante = false;
+    this.vasHaciaAtras = false;
   }
 
 
@@ -54,8 +57,25 @@ class Dante {
       }, 300)
      }
   };
-  
+  haciaAtras = (paTras) => {
+    this.vasHaciaAtras = paTras
+  }
 
+  haciaDelante = (haciaDelante) => {
+    this.vasHaciaDelante = haciaDelante;
+  }
+
+  pasitoDFluido = () => {
+    if (this.vasHaciaDelante === true) {
+      this.x += this.velocidad
+    }
+  }
+
+  pasitoIFluido = () => {
+    if (this.vasHaciaAtras === true) {
+      this.x -= this.velocidad
+    }
+  }
 
     
     

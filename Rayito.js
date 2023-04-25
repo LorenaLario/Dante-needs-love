@@ -6,7 +6,7 @@ class Rayito {
         this.x = posicX;
         this.y = 0;
 
-        this.w = 70;
+        this.w = 40;
         this.h = 40;
 
         this.velocidad = 3.3

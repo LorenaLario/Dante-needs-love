@@ -45,5 +45,21 @@ window.addEventListener("keydown", (event) => {
   if (event.code === "Space") {
     gameObj.danteObj.imgSaltando(); 
   }
-  
+
+  if (event.code === "KeyA") {
+    gameObj.danteObj.haciaAtras(true)
+  }
+
+  if (event.code === "KeyD") {
+    gameObj.danteObj.haciaDelante(true)
+  }
 });
+
+window.addEventListener("keyup", (event) => {
+  if (event.code === "KeyD") {
+    gameObj.danteObj.haciaDelante(false)
+  }
+  if (event.code === "KeyA") {
+    gameObj.danteObj.haciaAtras(false)
+  }
+})
