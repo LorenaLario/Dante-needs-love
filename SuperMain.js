@@ -4,7 +4,7 @@ const pantallaInicioDOM = document.querySelector("#pantalla-inicio");
 const pantallaPerderDOM = document.querySelector("#gameOver");
 const btnPlayDOM = document.querySelector("#playBtn");
 const btnAgainDOM = document.querySelector("#AgainBtn");
-const audioNivel1 = document.querySelector("#audio-1");
+const audioJuego = document.querySelector("#audio-1");
 
 
 const primerNivel = document.querySelector("#primer-nivel");
@@ -21,7 +21,7 @@ const startGame = () => {
 
   gameObj = new Game();
   console.log(gameObj);
-  audioNivel1.play();
+  audioJuego.play();
   gameObj.gameLoop();
 };
 
@@ -31,17 +31,10 @@ const playAgain = () => {
 
   gameObj = new Game();
   
-  audioNivel1.play();
+  audioJuego.play();
   gameObj.gameLoop();
 };
 
-// const firstAudio = () => {
-//   if (pantallaInicioDOM.classList("hide")) {
-//     firstAudio.autoplay = false;
-//   } else if (pantallaPerderDOM.classList("")) {
-  
-//   }
-// }
 
 //! ADD EVENT LISTENERS
 
@@ -52,4 +45,5 @@ window.addEventListener("keydown", (event) => {
   if (event.code === "Space") {
     gameObj.danteObj.imgSaltando(); 
   }
+  
 });

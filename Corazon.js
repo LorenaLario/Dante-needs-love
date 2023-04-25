@@ -9,7 +9,7 @@ class Corazon {
         this.w = 70;
         this.h = 40;
 
-        this.velocidad = 6;
+        this.velocidad = 3.3;
     }
 
     draw = () => {

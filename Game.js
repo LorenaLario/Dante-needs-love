@@ -16,13 +16,14 @@ class Game {
     //? Añadimos los pinchos y corazones:
     this.pinchosArr = [];
     this.corazonesArr = [];
+    this.rayitosArr = [];
     this.puntos = 0;
     this.nivel = 1;
 
     this.isGameOn = true;
   }
 
-  drawBackground = () => {
+  drawBackground = (img) => {
     this.backgroundX -= this.backgroundVelocidad;
     this.backgroundX2 -= this.backgroundVelocidad;
     if (this.backgroundX <= - canvas.width) {
@@ -40,8 +41,8 @@ class Game {
     this.isGameOn = false;
     primerNivel.classList.add("hide");
     gameOver.classList.remove("hide");
-    audioNivel1.pause();
-    audioNivel1.currentTime = 0;
+    audioJuego.pause();
+    audioJuego.currentTime = 0;
   };
 
   pinchosEnPantalla = (img) => {
@@ -65,6 +66,17 @@ class Game {
       this.corazonesArr.push(nuevoCorazon);
     }
   };
+
+  rayitosEnPantalla = () => {
+    if (
+      this.rayitosArr.length === 0 ||
+      this.rayitosArr[this.rayitosArr.length - 1].y > canvas.height) 
+      {
+      let posicionRandomRayito = Math.random() * canvas.width;
+      let nuevoRayito = new Rayito(posicionRandomRayito);
+      this.rayitosArr.push(nuevoRayito)
+       }
+      }  
 
   colisionDantePincho = () => {
     this.pinchosArr.forEach((eachPincho) => {
@@ -94,6 +106,19 @@ class Game {
     });
   };
 
+  colisionDanteRayito = () => {
+    this.rayitosArr.forEach((eachRayito) => {
+      if (
+        eachRayito.x < this.danteObj.x + this.danteObj.w &&
+        eachRayito.x + eachRayito.w > this.danteObj.x &&
+        eachRayito.y < this.danteObj.y + this.danteObj.h &&
+        eachRayito.h + eachRayito.y > this.danteObj.y
+      ) {
+        this.gameOver();
+      }
+    });
+  }
+
   dibujadoPuntuacion = () => {
     ctx.font = "26px Comic Sans MS";
     ctx.fillStyle = "pink";
@@ -105,48 +130,38 @@ class Game {
       return;
     }
     this.pinchosEnPantalla("imagenes/pincho.png");
-    this.colisionDantePincho();
-    this.colisionDanteCorazon();
-    this.danteObj.logicaSalto();
-    this.pinchosArr.forEach((eachPincho) => {
-      eachPincho.pinchosSeMueven();
-    });
-    this.corazonesArr.forEach((eachCorazon) => {
-      eachCorazon.corazonesSeMueven();
-    });
-
     this.corazonesEnPantalla("imagenes/corazon-primer-nivel.png");
     this.terminaNivel1();
-
-    //? Dibujado de los elementos
-    this.drawBackground();
-    this.danteObj.draw();
-    this.pinchosArr.forEach((eachPincho) => {
-      eachPincho.draw();
-    });
-    this.corazonesArr.forEach((eachCorazon) => {
-      eachCorazon.draw();
-    });
-
-    this.dibujadoPuntuacion();
+    
   };
 
   logicaNivel2 = () => {
     if (this.nivel !== 2) {
       return;
     }
-    this.pinchosEnPantalla("imagenes/pincho.png");
+    this.pinchosEnPantalla("imagenes/pincho2.png");
+    this.corazonesEnPantalla("imagenes/corazon-segundo-nivel.png")
+    this.rayitosEnPantalla();
+    this.colisionDanteRayito();
+    this.rayitosArr.forEach((eachRayito) => {
+      eachRayito.rayitosCaen();
+    });
+
+
   };
 
   empiezaNivel2 = () => {
     this.background = new Image();
-    this.background.src = "imagenes/intento.jpg";
-    // this.nivel++;
+    this.background.src = "imagenes/fondo-nivel-2.jpg";
+    this.background2 = new Image();
+    this.background2.src = "imagenes/fondo-nivel-2 - invertido.jpg";
+    
+    this.nivel++;
   };
 
   terminaNivel1 = () => {
     if (this.puntos === 3) {
-      // this.empiezaNivel2();
+      this.empiezaNivel2();
     }
   };
 
@@ -157,10 +172,38 @@ class Game {
   gameLoop = () => {
     console.log("ejecutando recursion");
 
-    //? Limpieza del canvas
     this.limpiezaCanvas()
+
     //? Acciones y movimientos de los elementos
     this.logicaNivel1();
+    this.logicaNivel2();
+    // this.colisionDantePincho();
+    this.colisionDanteCorazon();
+    this.danteObj.logicaSalto();
+    this.pinchosArr.forEach((eachPincho) => {
+      eachPincho.pinchosSeMueven();
+    });
+    this.corazonesArr.forEach((eachCorazon) => {
+      eachCorazon.corazonesSeMueven();
+    });
+
+    //dibujado
+
+    this.drawBackground();
+    this.danteObj.draw();
+    this.pinchosArr.forEach((eachPincho) => {
+      eachPincho.draw();
+    });
+    this.corazonesArr.forEach((eachCorazon) => {
+      eachCorazon.draw();
+    });
+  
+
+    this.dibujadoPuntuacion();
+    this.rayitosArr.forEach((eachRayito) => {
+      eachRayito.draw(); 
+    })
+
 
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);

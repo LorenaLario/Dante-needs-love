@@ -10,7 +10,7 @@ class Dante {
     this.w = 60;
     this.h = 60;
 
-    this.velocidadSalto = 10;
+    this.velocidadSalto = 5;
 
     this.puedeSaltar = true;
     this.estasSaltando = false;
@@ -21,7 +21,7 @@ class Dante {
     ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
   };
 
-  //para que salte
+  
   jump = () => {
     if (this.y > 0 && this.puedeSaltar === true) {
         this.puedeSaltar = false
@@ -53,9 +53,10 @@ class Dante {
           this.estasSaltando = false;
       }, 300)
      }
-     
-     
-    }
+  };
+  
+
+
     
     
     

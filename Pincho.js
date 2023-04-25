@@ -9,7 +9,7 @@ class Pincho {
         this.w = 30;
         this.h = 40;
 
-        this.velocidad = 6;
+        this.velocidad = 3;
     }
 
     draw = () => {
