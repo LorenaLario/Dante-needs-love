@@ -1,6 +1,7 @@
 body {
     font-family: "Comic Sans MS", cursive, sans-serif;
     background-color: rgb(202, 247, 250);
+    overflow: hidden;
 }
 .pantalla-base {
     margin: auto;
@@ -94,5 +95,25 @@ body {
 }
 
 #primer-nivel {
-    border: none
+    border: none;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(202, 247, 250);
+    
+}
+
+#primer-nivel button {
+    height: 30px;
+    width: 80px;
+    border-radius: 15px;
+    margin-top: 13px;
+    margin-right: 5px;
+
+}
+
+#primer-nivel div {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }

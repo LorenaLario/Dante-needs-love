@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="Dante needs love">
     <title>Dante needs love</title>
+    <script src="https://kit.fontawesome.com/3f71e671a8.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./style.css">
 </head>
 
@@ -25,17 +26,22 @@
 
         <div id="img-and-button">
             <img src="imagenes/teclitas-de-juego.png" alt="img-teclitas">
-            <!-- Aquí falta poner el href de la siguiente seccion -->
             <button id="playBtn">Que comience la aventura !</button>
         </div>
     </section>
-
+    
     <section id="primer-nivel" class="pantalla-base hide">
         <audio src="canciones/cancion-nivel-1.mp3" id="audio-1" preload="auto"></audio>
         <canvas class="my-Canvas" width="1052" height="650"></canvas>
+        <div>
+             <button id = "btnPause"><i class="fa-solid fa-circle-pause fa-xl" style="color: #4475ca;"></i></button>
+             <button id = "btnMusic"><i class="fa-solid fa-microphone-lines-slash fa-xl" style="color: #4475ca;"></i></button>
+        </div>
+       
     </section>
     <section id="gameOver" class="pantalla-base hide">
         <img src="imagenes/has-perdido.png" alt="img-sad-Dante">
+        <p id = "puntuacion">Tu puntuación es:</p>
         <button id="AgainBtn">Otra vez !</button>
     </section>
     <script src="./SuperMain.js"></script>

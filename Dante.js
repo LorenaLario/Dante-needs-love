@@ -23,7 +23,6 @@ class Dante {
   draw = () => {
     ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
   };
-
   
   jump = () => {
     if (this.y > 0 && this.puedeSaltar === true) {
@@ -58,7 +57,6 @@ class Dante {
      }
   };
 
-  
   haciaAtras = (paTras) => {
     this.vasHaciaAtras = paTras
   };
@@ -77,10 +75,7 @@ class Dante {
     if (this.vasHaciaAtras === true) {
       this.x -= this.velocidad
     }
-  };
-
-    
-    
+  };    
     
   };
 

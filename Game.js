@@ -17,13 +17,17 @@ class Game {
     this.pinchosArr = [];
     this.corazonesArr = [];
     this.rayitosArr = [];
+    this.puntosArr = [];
     this.puntos = 0;
     this.nivel = 1;
+    this.pausado = false;
+    this.musicaPausada = false;
 
     this.isGameOn = true;
   }
 
-  drawBackground = (img) => {
+  drawBackground = () => {
+    if (!this.pausado) {
     this.backgroundX -= this.backgroundVelocidad;
     this.backgroundX2 -= this.backgroundVelocidad;
     if (this.backgroundX <= - canvas.width) {
@@ -32,17 +36,19 @@ class Game {
     if (this.backgroundX2 <= -canvas.width) {
       this.backgroundX2 = canvas.width;
     }
+  }
     ctx.drawImage(this.background, this.backgroundX, 0, canvas.width, canvas.height);
     ctx.drawImage(this.background2, this.backgroundX2, 0, canvas.width, canvas.height)
   };
 
   gameOver = () => {
-    // 1- detener el juego
     this.isGameOn = false;
     primerNivel.classList.add("hide");
     gameOver.classList.remove("hide");
     audioJuego.pause();
     audioJuego.currentTime = 0;
+    puntuacionFinal.innerText = `Tu puntuación es: ${this.puntos}`
+    this.puntosArr.push(this.puntos)
   };
 
   pinchosEnPantalla = (img) => {
@@ -121,9 +127,17 @@ class Game {
 
   dibujadoPuntuacion = () => {
     ctx.font = "26px Comic Sans MS";
-    ctx.fillStyle = "pink";
+    ctx.fillStyle = "magenta";
     ctx.fillText(`Puntos: ${this.puntos}`, 430, 50);
   };
+
+  danteNoSeSale = () => {
+    if (this.danteObj.x + this.danteObj.w > canvas.width) {
+      this.danteObj.x = canvas.width - this.danteObj.w
+    } else if (this.danteObj.x < 0) {
+      this.danteObj.x = 0
+    }
+  }
 
   logicaNivel1 = () => {
     if (this.nivel !== 1) {
@@ -171,24 +185,26 @@ class Game {
 
   gameLoop = () => {
     console.log("ejecutando recursion");
+    if (!this.pausado) {
 
-    this.limpiezaCanvas()
+      this.limpiezaCanvas()
 
-    //? Acciones y movimientos de los elementos
-    this.logicaNivel1();
-    this.logicaNivel2();
-    this.colisionDantePincho();
-    this.colisionDanteCorazon();
-    this.danteObj.pasitoDFluido();
-    this.danteObj.pasitoIFluido();
-    this.danteObj.logicaSalto();
-    this.pinchosArr.forEach((eachPincho) => {
-      eachPincho.pinchosSeMueven();
-    });
-    this.corazonesArr.forEach((eachCorazon) => {
-      eachCorazon.corazonesSeMueven();
-    });
-
+      //? Acciones y movimientos de los elementos
+      this.logicaNivel1();
+      this.logicaNivel2();
+      this.danteNoSeSale();
+      // this.colisionDantePincho();
+      this.colisionDanteCorazon();
+      this.danteObj.pasitoDFluido();
+      this.danteObj.pasitoIFluido();
+      this.danteObj.logicaSalto();
+      this.pinchosArr.forEach((eachPincho) => {
+        eachPincho.pinchosSeMueven();
+      });
+      this.corazonesArr.forEach((eachCorazon) => {
+        eachCorazon.corazonesSeMueven();
+      });
+    }
     //dibujado
 
     this.drawBackground();
@@ -205,7 +221,6 @@ class Game {
     this.rayitosArr.forEach((eachRayito) => {
       eachRayito.draw(); 
     })
-
 
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);
