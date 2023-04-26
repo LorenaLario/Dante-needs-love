@@ -193,7 +193,7 @@ class Game {
       this.logicaNivel1();
       this.logicaNivel2();
       this.danteNoSeSale();
-      // this.colisionDantePincho();
+      this.colisionDantePincho();
       this.colisionDanteCorazon();
       this.danteObj.pasitoDFluido();
       this.danteObj.pasitoIFluido();
