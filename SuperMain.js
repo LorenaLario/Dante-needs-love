@@ -1,4 +1,4 @@
-//! VARIABLES GLOBALES
+//! VARIABLES
 
 const pantallaInicioDOM = document.querySelector("#pantalla-inicio");
 const pantallaPerderDOM = document.querySelector("#gameOver");
@@ -13,7 +13,7 @@ const ctx = canvas.getContext("2d");
 
 let gameObj;
 
-//! FUNCIONES QUE MANEJAN EL ESTADO DEL JUEGO
+//! FUNCIONES
 
 const startGame = () => {
   pantallaInicioDOM.classList.add("hide");

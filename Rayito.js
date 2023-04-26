@@ -6,10 +6,10 @@ class Rayito {
         this.x = posicX;
         this.y = 0;
 
-        this.w = 40;
-        this.h = 40;
+        this.w = 18;
+        this.h = 20;
 
-        this.velocidad = 3.3
+        this.velocidad = 1.9;
     }
 
     draw = () => {

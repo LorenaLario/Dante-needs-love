@@ -154,13 +154,13 @@ class Game {
     this.background = new Image();
     this.background.src = "imagenes/fondo-nivel-2.jpg";
     this.background2 = new Image();
-    this.background2.src = "imagenes/fondo-nivel-2 - invertido.jpg";
+    this.background2.src = "imagenes/fondo-nivel-2-invertido.jpg";
     
     this.nivel++;
   };
 
   terminaNivel1 = () => {
-    if (this.puntos === 3) {
+    if (this.puntos === 5) {
       this.empiezaNivel2();
     }
   };
@@ -177,7 +177,7 @@ class Game {
     //? Acciones y movimientos de los elementos
     this.logicaNivel1();
     this.logicaNivel2();
-    // this.colisionDantePincho();
+    this.colisionDantePincho();
     this.colisionDanteCorazon();
     this.danteObj.pasitoDFluido();
     this.danteObj.pasitoIFluido();
