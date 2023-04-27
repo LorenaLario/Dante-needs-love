@@ -173,7 +173,7 @@ class Game {
     if (this.nivel !== 2) {
       return;
     }
-    this.pinchosEnPantallaNivel2("imagenes/pincho3.png");
+    this.pinchosEnPantallaNivel2("imagenes/pincho2.png");
     this.corazonesEnPantalla("imagenes/corazon-segundo-nivel.png");
     this.rayitosEnPantalla();
     this.colisionDanteRayito();
