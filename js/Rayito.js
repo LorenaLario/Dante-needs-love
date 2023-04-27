@@ -21,6 +21,6 @@ class Rayito {
     };
 
     rayitosCaen2 = () => {
-        this.y += this.velocidad * 1.7;
+        this.y += this.velocidad * 1.2;
     };
 };
