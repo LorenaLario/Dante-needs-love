@@ -1,5 +1,3 @@
-//! VARIABLES
-
 const pantallaInicioDOM = document.querySelector("#pantalla-inicio");
 const pantallaPerderDOM = document.querySelector("#gameOver");
 const btnPlayDOM = document.querySelector("#playBtn");
@@ -8,7 +6,7 @@ const audioJuego = document.querySelector("#audio-1");
 const puntuacionFinal = document.querySelector("#puntuacion");
 const btnPauseJuego = document.querySelector("#btnPause");
 const btnPauseMusic = document.querySelector("#btnMusic");
-
+const listaRanking = document.querySelector("#lista")
 
 const primerNivel = document.querySelector("#primer-nivel");
 const canvas = primerNivel.querySelector(".my-Canvas");
@@ -18,13 +16,10 @@ let gameObj;
 let pausado = false;
 
 
-//! FUNCIONES
-
 const startGame = () => {
   pantallaInicioDOM.classList.add("hide");
   primerNivel.classList.remove("hide");
   
-
   gameObj = new Game();
   audioJuego.play();
   audioJuego.volume = 0.05;
@@ -41,11 +36,10 @@ const playAgain = () => {
   gameObj.gameLoop();
 };
 
- 
-//! ADD EVENT LISTENERS
 
 btnPlayDOM.addEventListener("click", startGame);
 btnAgainDOM.addEventListener("click", playAgain);
+canvas.addEventListener("click", gameObj.danteObj.imgSaltando);
 
 window.addEventListener("keydown", (event) => {
   if (event.code === "Space") {
@@ -60,11 +54,6 @@ window.addEventListener("keydown", (event) => {
     gameObj.danteObj.haciaDelante(true)
   }
 });
-
-canvas.addEventListener("click", () => {
-  gameObj.danteObj.imgSaltando()
-}) 
-
 
 window.addEventListener("keyup", (event) => {
   if (event.code === "KeyD") {
@@ -83,7 +72,7 @@ btnPauseJuego.addEventListener('click', () => {
     audioJuego.play()
   }
   
-})
+});
 btnPauseMusic.addEventListener('click', () => {
   if (!gameObj.musicaPausada) {
     audioJuego.pause();
@@ -95,4 +84,7 @@ btnPauseMusic.addEventListener('click', () => {
     audioJuego.play();
   }
     
-})
+});
+
+
+

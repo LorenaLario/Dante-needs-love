@@ -14,9 +14,9 @@ class Corazon {
 
     draw = () => {
         ctx.drawImage(this.img, this.x, this.y, this.w, this.h)
-    }
+    };
 
     corazonesSeMueven = () => {
         this.x -= this.velocidad;
-    }
-}
+    };
+};

@@ -1,6 +1,5 @@
 class Dante {
   constructor() {
-    //? Propiedades de Dante:
     this.img = new Image();
     this.img.src = "imagenes/al-moverse.png";
 

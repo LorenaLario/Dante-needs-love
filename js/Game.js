@@ -1,6 +1,5 @@
 class Game {
   constructor() {
-    //? Agregamos el fondo:
     this.background = new Image();
     this.background.src = "imagenes/fondo-nivel1.jpg";
     this.background2 = new Image();
@@ -9,34 +8,31 @@ class Game {
     this.backgroundX2 = canvas.width;
     this.backgroundVelocidad = 1;
 
-    //? Agregamos el personaje principal:
     this.danteObj = new Dante();
-    console.log(this.danteObj);
 
-    //? Añadimos los pinchos y corazones:
     this.pinchosArr = [];
     this.corazonesArr = [];
     this.rayitosArr = [];
-    this.puntosArr = [];
+    this.puntosArr = JSON.parse(localStorage.getItem("puntuacion"));
+
     this.puntos = 0;
     this.nivel = 1;
     this.pausado = false;
     this.musicaPausada = false;
-
     this.isGameOn = true;
   }
 
   drawBackground = () => {
     if (!this.pausado) {
-    this.backgroundX -= this.backgroundVelocidad;
-    this.backgroundX2 -= this.backgroundVelocidad;
-    if (this.backgroundX <= - canvas.width) {
-      this.backgroundX = canvas.width;
+      this.backgroundX -= this.backgroundVelocidad;
+      this.backgroundX2 -= this.backgroundVelocidad;
+      if (this.backgroundX <= -canvas.width) {
+        this.backgroundX = canvas.width;
+      }
+      if (this.backgroundX2 <= -canvas.width) {
+        this.backgroundX2 = canvas.width;
+      }
     }
-    if (this.backgroundX2 <= -canvas.width) {
-      this.backgroundX2 = canvas.width;
-    }
-  }
     ctx.drawImage(this.background, this.backgroundX, 0, canvas.width, canvas.height);
     ctx.drawImage(this.background2, this.backgroundX2, 0, canvas.width, canvas.height);
   };
@@ -45,17 +41,22 @@ class Game {
     this.isGameOn = false;
     primerNivel.classList.add("hide");
     gameOver.classList.remove("hide");
+
     audioJuego.pause();
     audioJuego.currentTime = 0;
-    puntuacionFinal.innerText = `Tu puntuación es: ${this.puntos}`
-    this.puntosArr.push(this.puntos)
+
+    puntuacionFinal.innerText = `Tu puntuación es: ${this.puntos}`;
+    if (this.puntosArr === null) {
+      this.puntosArr = [];
+    }
+    this.puntosArr.push(this.puntos);
+    let puntosArrJSON = JSON.stringify(this.puntosArr);
+    localStorage.setItem("puntuacion", puntosArrJSON);
+    this.almacenarRanking();
   };
 
   pinchosEnPantalla = () => {
-    if (
-      this.pinchosArr.length === 0 ||
-      this.pinchosArr[this.pinchosArr.length - 1].x < canvas.width
-    ) {
+    if (this.pinchosArr.length === 0 || this.pinchosArr[this.pinchosArr.length - 1].x < canvas.width) {
       let posicionRandomPincho = Math.random() * 300 + canvas.width + 200;
       let nuevoPincho = new Pincho(575, posicionRandomPincho, "imagenes/pincho.png");
       this.pinchosArr.push(nuevoPincho);
@@ -63,10 +64,7 @@ class Game {
   };
 
   pinchosEnPantallaNivel2 = (img) => {
-    if (
-      this.pinchosArr.length === 0 ||
-      this.pinchosArr[this.pinchosArr.length - 1].x < canvas.width / 1.5
-    ) {
+    if (this.pinchosArr.length === 0 || this.pinchosArr[this.pinchosArr.length - 1].x < canvas.width / 1.5) {
       let posicionRandomPincho = Math.random() * 300 + canvas.width + 350;
       let nuevoPincho = new Pincho(575, posicionRandomPincho, img);
       this.pinchosArr.push(nuevoPincho);
@@ -74,10 +72,7 @@ class Game {
   };
 
   corazonesEnPantalla = () => {
-    if (
-      this.corazonesArr.length === 0 ||
-      this.corazonesArr[this.corazonesArr.length - 1].x < canvas.width
-    ) {
+    if (this.corazonesArr.length === 0 || this.corazonesArr[this.corazonesArr.length - 1].x < canvas.width) {
       let posicionRandomCorazon = Math.random() * 300 + canvas.width + 400;
       let nuevoCorazon = new Corazon(505, posicionRandomCorazon, "imagenes/corazon-primer-nivel.png");
       this.corazonesArr.push(nuevoCorazon);
@@ -85,36 +80,27 @@ class Game {
   };
 
   corazonesEnPantallaNivel2 = (img) => {
-    if (
-      this.corazonesArr.length === 0 ||
-      this.corazonesArr[this.corazonesArr.length - 1].x < canvas.width
-    ) {
+    if (this.corazonesArr.length === 0 || this.corazonesArr[this.corazonesArr.length - 1].x < canvas.width) {
       let posicionRandomCorazon = Math.random() * 300 + canvas.width + 600;
       let nuevoCorazon = new Corazon(505, posicionRandomCorazon, img);
       this.corazonesArr.push(nuevoCorazon);
-  }
-};
+    }
+  };
 
   rayitosEnPantalla = () => {
-    if (
-      this.rayitosArr.length === 0 ||
-      this.rayitosArr[this.rayitosArr.length - 1].y > canvas.height) 
-      {
+    if (this.rayitosArr.length === 0 || this.rayitosArr[this.rayitosArr.length - 1].y > canvas.height) {
       let posicionRandomRayito = Math.random() * canvas.width;
       let nuevoRayito = new Rayito(posicionRandomRayito, "imagenes/rayito.png");
-      this.rayitosArr.push(nuevoRayito)
-       }
+      this.rayitosArr.push(nuevoRayito);
+    }
   };
-  
+
   rayitosEnPantallaNivel3 = () => {
-    if (
-      this.rayitosArr.length === 0 ||
-      this.rayitosArr[this.rayitosArr.length - 1].y > canvas.height / 2) 
-      {
+    if (this.rayitosArr.length === 0 || this.rayitosArr[this.rayitosArr.length - 1].y > canvas.height / 2) {
       let posicionRandomRayito = Math.random() * canvas.width;
       let nuevoRayito = new Rayito(posicionRandomRayito, "imagenes/rayito3.png");
-      this.rayitosArr.push(nuevoRayito)
-       }
+      this.rayitosArr.push(nuevoRayito);
+    }
   };
 
   colisionDantePincho = () => {
@@ -125,7 +111,6 @@ class Game {
         eachPincho.y < this.danteObj.y + this.danteObj.h &&
         eachPincho.h + eachPincho.y > this.danteObj.y
       ) {
-        //console.log("dante se pinchó")
         this.gameOver();
       }
     });
@@ -156,21 +141,23 @@ class Game {
         this.gameOver();
       }
     });
-  }
+  };
 
   dibujadoPuntuacion = () => {
-    ctx.font = "26px Comic Sans MS";
+    ctx.font = "32px Comic Sans MS";
     ctx.fillStyle = "magenta";
+    ctx.strokeStyle = "black";
     ctx.fillText(`Puntos: ${this.puntos}`, 430, 50);
+    ctx.strokeText(`Puntos: ${this.puntos}`, 430, 50);
   };
 
   danteNoSeSale = () => {
     if (this.danteObj.x + this.danteObj.w > canvas.width) {
-      this.danteObj.x = canvas.width - this.danteObj.w
+      this.danteObj.x = canvas.width - this.danteObj.w;
     } else if (this.danteObj.x < 0) {
-      this.danteObj.x = 0
+      this.danteObj.x = 0;
     }
-  }
+  };
 
   logicaNivel1 = () => {
     if (this.nivel !== 1) {
@@ -180,7 +167,6 @@ class Game {
     this.corazonesEnPantalla();
 
     this.terminanNiveles();
-    
   };
 
   logicaNivel2 = () => {
@@ -188,12 +174,12 @@ class Game {
       return;
     }
     this.pinchosEnPantallaNivel2("imagenes/pincho3.png");
-    this.corazonesEnPantalla("imagenes/corazon-segundo-nivel.png")
+    this.corazonesEnPantalla("imagenes/corazon-segundo-nivel.png");
     this.rayitosEnPantalla();
     this.colisionDanteRayito();
     this.rayitosArr.forEach((eachRayito) => {
-      eachRayito.rayitosCaen()
-    })
+      eachRayito.rayitosCaen();
+    });
 
     this.terminanNiveles();
   };
@@ -208,8 +194,7 @@ class Game {
     this.colisionDanteRayito();
     this.rayitosArr.forEach((eachRayito) => {
       eachRayito.rayitosCaen2();
-    })
-
+    });
   };
 
   empiezaNivel2 = () => {
@@ -217,7 +202,7 @@ class Game {
     this.background.src = "imagenes/fondo-nivel-2.jpg";
     this.background2 = new Image();
     this.background2.src = "imagenes/fondo-nivel-2-invertido.jpg";
-    
+
     this.nivel = 2;
   };
 
@@ -226,7 +211,7 @@ class Game {
     this.background.src = "imagenes/fondo-nivel-3.jpg";
     this.background2 = new Image();
     this.background2.src = "imagenes/fondo-nivel-3-invertido.jpg";
-    
+
     this.nivel = 3;
   };
 
@@ -239,16 +224,23 @@ class Game {
   };
 
   limpiezaCanvas = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-  }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };
+
+  almacenarRanking = () => {
+    this.puntosArr.sort((a, b) => {
+      return b - a;
+    });
+    listaRanking.children[0].innerText = this.puntosArr[0];
+    listaRanking.children[1].innerText = this.puntosArr[1];
+    listaRanking.children[2].innerText = this.puntosArr[2];
+  };
 
   gameLoop = () => {
-    console.log("ejecutando recursion");
+
     if (!this.pausado) {
+      this.limpiezaCanvas();
 
-      this.limpiezaCanvas()
-
-      //? Acciones y movimientos de los elementos
       this.logicaNivel1();
       this.logicaNivel2();
       this.logicaNivel3();
@@ -265,7 +257,6 @@ class Game {
         eachCorazon.corazonesSeMueven();
       });
     }
-    //dibujado
 
     this.drawBackground();
     this.danteObj.draw();
@@ -275,15 +266,13 @@ class Game {
     this.corazonesArr.forEach((eachCorazon) => {
       eachCorazon.draw();
     });
-  
-
     this.dibujadoPuntuacion();
     this.rayitosArr.forEach((eachRayito) => {
-      eachRayito.draw(); 
-    })
+      eachRayito.draw();
+    });
 
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);
     }
   };
-}
+};

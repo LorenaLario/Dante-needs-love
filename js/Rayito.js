@@ -14,7 +14,7 @@ class Rayito {
 
     draw = () => {
         ctx.drawImage(this.img, this.x, this.y, this.w, this.h)
-    }
+    };
 
     rayitosCaen = () => {
         this.y += this.velocidad;
@@ -22,7 +22,5 @@ class Rayito {
 
     rayitosCaen2 = () => {
         this.y += this.velocidad * 1.7;
-    }
-    
-    
-}
+    };
+};
