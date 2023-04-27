@@ -38,7 +38,7 @@ class Game {
     }
   }
     ctx.drawImage(this.background, this.backgroundX, 0, canvas.width, canvas.height);
-    ctx.drawImage(this.background2, this.backgroundX2, 0, canvas.width, canvas.height)
+    ctx.drawImage(this.background2, this.backgroundX2, 0, canvas.width, canvas.height);
   };
 
   gameOver = () => {
@@ -51,27 +51,49 @@ class Game {
     this.puntosArr.push(this.puntos)
   };
 
-  pinchosEnPantalla = (img) => {
+  pinchosEnPantalla = () => {
     if (
       this.pinchosArr.length === 0 ||
       this.pinchosArr[this.pinchosArr.length - 1].x < canvas.width
     ) {
       let posicionRandomPincho = Math.random() * 300 + canvas.width + 200;
+      let nuevoPincho = new Pincho(575, posicionRandomPincho, "imagenes/pincho.png");
+      this.pinchosArr.push(nuevoPincho);
+    }
+  };
+
+  pinchosEnPantallaNivel2 = (img) => {
+    if (
+      this.pinchosArr.length === 0 ||
+      this.pinchosArr[this.pinchosArr.length - 1].x < canvas.width / 1.5
+    ) {
+      let posicionRandomPincho = Math.random() * 300 + canvas.width + 350;
       let nuevoPincho = new Pincho(575, posicionRandomPincho, img);
       this.pinchosArr.push(nuevoPincho);
     }
   };
 
-  corazonesEnPantalla = (img) => {
+  corazonesEnPantalla = () => {
     if (
       this.corazonesArr.length === 0 ||
       this.corazonesArr[this.corazonesArr.length - 1].x < canvas.width
     ) {
       let posicionRandomCorazon = Math.random() * 300 + canvas.width + 400;
-      let nuevoCorazon = new Corazon(505, posicionRandomCorazon, img);
+      let nuevoCorazon = new Corazon(505, posicionRandomCorazon, "imagenes/corazon-primer-nivel.png");
       this.corazonesArr.push(nuevoCorazon);
     }
   };
+
+  corazonesEnPantallaNivel2 = (img) => {
+    if (
+      this.corazonesArr.length === 0 ||
+      this.corazonesArr[this.corazonesArr.length - 1].x < canvas.width
+    ) {
+      let posicionRandomCorazon = Math.random() * 300 + canvas.width + 600;
+      let nuevoCorazon = new Corazon(505, posicionRandomCorazon, img);
+      this.corazonesArr.push(nuevoCorazon);
+  }
+};
 
   rayitosEnPantalla = () => {
     if (
@@ -79,10 +101,21 @@ class Game {
       this.rayitosArr[this.rayitosArr.length - 1].y > canvas.height) 
       {
       let posicionRandomRayito = Math.random() * canvas.width;
-      let nuevoRayito = new Rayito(posicionRandomRayito);
+      let nuevoRayito = new Rayito(posicionRandomRayito, "imagenes/rayito.png");
       this.rayitosArr.push(nuevoRayito)
        }
-      }  
+  };
+  
+  rayitosEnPantallaNivel3 = () => {
+    if (
+      this.rayitosArr.length === 0 ||
+      this.rayitosArr[this.rayitosArr.length - 1].y > canvas.height / 2) 
+      {
+      let posicionRandomRayito = Math.random() * canvas.width;
+      let nuevoRayito = new Rayito(posicionRandomRayito, "imagenes/rayito3.png");
+      this.rayitosArr.push(nuevoRayito)
+       }
+  };
 
   colisionDantePincho = () => {
     this.pinchosArr.forEach((eachPincho) => {
@@ -143,9 +176,10 @@ class Game {
     if (this.nivel !== 1) {
       return;
     }
-    this.pinchosEnPantalla("imagenes/pincho.png");
-    this.corazonesEnPantalla("imagenes/corazon-primer-nivel.png");
-    this.terminaNivel1();
+    this.pinchosEnPantalla();
+    this.corazonesEnPantalla();
+
+    this.terminanNiveles();
     
   };
 
@@ -153,14 +187,28 @@ class Game {
     if (this.nivel !== 2) {
       return;
     }
-    this.pinchosEnPantalla("imagenes/pincho2.png");
+    this.pinchosEnPantallaNivel2("imagenes/pincho3.png");
     this.corazonesEnPantalla("imagenes/corazon-segundo-nivel.png")
     this.rayitosEnPantalla();
     this.colisionDanteRayito();
     this.rayitosArr.forEach((eachRayito) => {
-      eachRayito.rayitosCaen();
-    });
+      eachRayito.rayitosCaen()
+    })
 
+    this.terminanNiveles();
+  };
+
+  logicaNivel3 = () => {
+    if (this.nivel !== 3) {
+      return;
+    }
+    this.pinchosEnPantallaNivel2("imagenes/pincho3.png");
+    this.corazonesEnPantallaNivel2("imagenes/corazon-tercer-nivel.png");
+    this.rayitosEnPantallaNivel3();
+    this.colisionDanteRayito();
+    this.rayitosArr.forEach((eachRayito) => {
+      eachRayito.rayitosCaen2();
+    })
 
   };
 
@@ -170,12 +218,23 @@ class Game {
     this.background2 = new Image();
     this.background2.src = "imagenes/fondo-nivel-2-invertido.jpg";
     
-    this.nivel++;
+    this.nivel = 2;
   };
 
-  terminaNivel1 = () => {
+  empiezaNivel3 = () => {
+    this.background = new Image();
+    this.background.src = "imagenes/fondo-nivel-3.jpg";
+    this.background2 = new Image();
+    this.background2.src = "imagenes/fondo-nivel-3-invertido.jpg";
+    
+    this.nivel = 3;
+  };
+
+  terminanNiveles = () => {
     if (this.puntos === 5) {
       this.empiezaNivel2();
+    } else if (this.puntos === 10) {
+      this.empiezaNivel3();
     }
   };
 
@@ -192,6 +251,7 @@ class Game {
       //? Acciones y movimientos de los elementos
       this.logicaNivel1();
       this.logicaNivel2();
+      this.logicaNivel3();
       this.danteNoSeSale();
       this.colisionDantePincho();
       this.colisionDanteCorazon();

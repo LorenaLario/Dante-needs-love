@@ -1,7 +1,7 @@
 class Rayito {
-    constructor(posicX) {
+    constructor(posicX, img) {
         this.img = new Image();
-        this.img.src ="imagenes/rayito.png";
+        this.img.src = img;
 
         this.x = posicX;
         this.y = 0;
@@ -9,7 +9,7 @@ class Rayito {
         this.w = 18;
         this.h = 20;
 
-        this.velocidad = 1.9;
+        this.velocidad = 3;
     }
 
     draw = () => {
@@ -18,5 +18,11 @@ class Rayito {
 
     rayitosCaen = () => {
         this.y += this.velocidad;
-    };  
+    };
+
+    rayitosCaen2 = () => {
+        this.y += this.velocidad * 1.7;
+    }
+    
+    
 }

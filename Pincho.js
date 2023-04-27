@@ -18,5 +18,5 @@ class Pincho {
 
     pinchosSeMueven = () => {
         this.x -= this.velocidad;
-    };  
-}
+    };
+ }
