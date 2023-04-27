@@ -216,9 +216,9 @@ class Game {
   };
 
   terminanNiveles = () => {
-    if (this.puntos === 5) {
+    if (this.puntos === 10) {
       this.empiezaNivel2();
-    } else if (this.puntos === 10) {
+    } else if (this.puntos === 20) {
       this.empiezaNivel3();
     }
   };
