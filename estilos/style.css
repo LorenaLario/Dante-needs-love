@@ -15,7 +15,7 @@ body {
 
 #pantalla-inicio {
     text-align: center;
-    background-image: url(imagenes/puntos.png);
+    background-image: url(../imagenes/puntos.png);
 }
 
 #pantalla-inicio div img {
