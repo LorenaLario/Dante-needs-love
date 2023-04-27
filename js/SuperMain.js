@@ -39,7 +39,9 @@ const playAgain = () => {
 
 btnPlayDOM.addEventListener("click", startGame);
 btnAgainDOM.addEventListener("click", playAgain);
-canvas.addEventListener("click", gameObj.danteObj.imgSaltando);
+canvas.addEventListener("click", () => {
+  gameObj.danteObj.imgSaltando();
+});
 
 window.addEventListener("keydown", (event) => {
   if (event.code === "Space") {
