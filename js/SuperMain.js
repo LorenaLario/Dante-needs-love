@@ -1,3 +1,5 @@
+
+// Variables DOM =
 const pantallaInicioDOM = document.querySelector("#pantalla-inicio");
 const pantallaPerderDOM = document.querySelector("#gameOver");
 const btnPlayDOM = document.querySelector("#playBtn");
@@ -15,7 +17,7 @@ const ctx = canvas.getContext("2d");
 let gameObj;
 let pausado = false;
 
-
+// Funciones para que el juego empiece y termine =
 const startGame = () => {
   pantallaInicioDOM.classList.add("hide");
   primerNivel.classList.remove("hide");
@@ -37,6 +39,7 @@ const playAgain = () => {
 };
 
 
+// AddEventListener =
 btnPlayDOM.addEventListener("click", startGame);
 btnAgainDOM.addEventListener("click", playAgain);
 canvas.addEventListener("click", () => {

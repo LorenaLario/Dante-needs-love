@@ -13,7 +13,7 @@ class Game {
     this.pinchosArr = [];
     this.corazonesArr = [];
     this.rayitosArr = [];
-    this.puntosArr = JSON.parse(localStorage.getItem("puntuacion"));
+    this.puntosArr = JSON.parse(localStorage.getItem("puntuacion")); //hacemos copia del array para poder pasarselo al localStorage
 
     this.puntos = 0;
     this.nivel = 1;
@@ -47,12 +47,12 @@ class Game {
 
     puntuacionFinal.innerText = `Tu puntuación es: ${this.puntos}`;
     if (this.puntosArr === null) {
-      this.puntosArr = [];
+      this.puntosArr = []; //si da null se crea el array
     }
-    this.puntosArr.push(this.puntos);
+    this.puntosArr.push(this.puntos); //añadimos los puntos al array
     let puntosArrJSON = JSON.stringify(this.puntosArr);
-    localStorage.setItem("puntuacion", puntosArrJSON);
-    this.almacenarRanking();
+    localStorage.setItem("puntuacion", puntosArrJSON); //aqui le pasamos al localStroage el nombre y el valor para que guarde la información
+    this.almacenarRanking(); //para que se vea el rangkin de los 3 mejores
   };
 
   pinchosEnPantalla = () => {
@@ -174,7 +174,7 @@ class Game {
       return;
     }
     this.pinchosEnPantallaNivel2("imagenes/pincho2.png");
-    this.corazonesEnPantalla("imagenes/corazon-segundo-nivel.png");
+    this.corazonesEnPantallaNivel2("imagenes/corazon-segundo-nivel.png");
     this.rayitosEnPantalla();
     this.colisionDanteRayito();
     this.rayitosArr.forEach((eachRayito) => {
@@ -218,7 +218,7 @@ class Game {
   terminanNiveles = () => {
     if (this.puntos === 10) {
       this.empiezaNivel2();
-    } else if (this.puntos === 20) {
+    } else if (this.puntos === 35) {
       this.empiezaNivel3();
     }
   };
@@ -228,9 +228,11 @@ class Game {
   };
 
   almacenarRanking = () => {
+    // .sort para ordenar los elementos dentro del array
     this.puntosArr.sort((a, b) => {
       return b - a;
     });
+    //accedemos a la lista y seleccionamos un hijo para cambiar su contenido por el numero que corresponde del array
     listaRanking.children[0].innerText = this.puntosArr[0];
     listaRanking.children[1].innerText = this.puntosArr[1];
     listaRanking.children[2].innerText = this.puntosArr[2];
@@ -240,7 +242,8 @@ class Game {
 
     if (!this.pausado) {
       this.limpiezaCanvas();
-
+      
+      // movimientos =
       this.logicaNivel1();
       this.logicaNivel2();
       this.logicaNivel3();
@@ -258,6 +261,7 @@ class Game {
       });
     }
 
+    // dibujamos los elementos comunes = 
     this.drawBackground();
     this.danteObj.draw();
     this.pinchosArr.forEach((eachPincho) => {
